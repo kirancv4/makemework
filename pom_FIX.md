@@ -1,6 +1,6 @@
 Error 1
 error:- Temperature was not of integer datatype, spliting of the temperature was incorrect .
-approach:- Understood the splitting of the temperature and made changes to split function in Main_Page.py .
+approach:- Understood the splitting of the temperature and made changes to split function of temperature in Main_Page.py .
 
 Error 2
 error:- KeyError.
@@ -16,7 +16,6 @@ product.price <= min_price
 
 Error 4
 error:- TypeError("unsupported operand type(s) for -: 'NoneType' and 'NoneType'")
-
 I think the function is not returning anything
 
 approach : Traced through the functions in Product_Object and founded that it was not returning any value .
