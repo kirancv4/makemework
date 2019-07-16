@@ -15,3 +15,18 @@ Approach : Traced back to the condition for selecting the minimum product of "Al
 product.price <= min_price
 
 Error 4
+error:- TypeError("unsupported operand type(s) for -: 'NoneType' and 'NoneType'")
+
+I think the function is not returning anything
+
+approach : Traced through the functions in Product_Object and founded that it was not returning any value .
+Fix :- Added the return statement.
+
+Error 5
+:Stop_Test_Exception('Stopping test because: Automation is not on the cart page') 
+
+I think that its not able to locate the xpath of checkout button.
+approach : In the error messages I founded out that the cart button was not able to get clicked, due to the xpath issue(//button[@onclick='goTocart']) I traced it back to the locators_conf.py file and checked if the xpath works or not.
+
+Fix:- changed the xpath to [//button[@onclick='goToCart']
+
