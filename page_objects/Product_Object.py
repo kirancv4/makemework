@@ -120,7 +120,7 @@ class Product_Object():
         positive="The cart currently has %d items"%self.CART_QUANTITY,
         negative="")
 
-        return empty_cart_flag
+        return self.CART_QUANTITY
 
     def add_product(self,product_name):
         "Add the lowest priced product with the filter condition in name"
@@ -149,7 +149,7 @@ class Product_Object():
         positive="Automation is on the Cart page",
         negative="Automation is not able to locate the Cart Title. Maybe it is not even on the cart page?")
         if result_flag:
-            self.switch_page("main")
+            self.switch_page("cart")
 
         return result_flag
 
