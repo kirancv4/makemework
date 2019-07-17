@@ -3,9 +3,11 @@ This module models the cart page on weather shopper
 URL: /cart
 """
 
-from .Base_Page import Base_Page
+import conf.locators_conf as locators
 from utils.Wrapit import Wrapit
-import conf.locators_conf as locators 
+
+from .Base_Page import Base_Page
+
 
 class Cart_Page(Base_Page):
     "This class models the cart page"
@@ -14,7 +16,7 @@ class Cart_Page(Base_Page):
     CART_ROW_COLUMN = locators.CART_ROW_COLUMN
     CART_TOTAL = locators.CART_TOTAL
     COL_NAME = 0
-    COL_PRICE = 1 
+    COL_PRICE = 1
 
     def start(self):
         "Override the start method of base"
@@ -26,6 +28,7 @@ class Cart_Page(Base_Page):
         #Convert the price to an int
         try:
             item[self.COL_PRICE] = int(item[self.COL_PRICE])
+            print(item[self.COL_PRICE])
         except Exception as e:
             self.write("Unable to convert the string %s into a number"%item[self.COL_PRICE])
 
@@ -35,14 +38,15 @@ class Cart_Page(Base_Page):
         "Get all the cart items as a list of [name,price] lists"
         cart_items = []
         row_elements = self.get_elements(self.CART_ROW)
-        for index,row in enumerate(row_elements):
+        for index,row in enumerate(row_elements):            
             column_elements = self.get_elements(self.CART_ROW_COLUMN%(index+1))
             item = []
             for col in column_elements:
                 text = self.get_dom_text(col)
-            item.append(text.decode('ascii'))
+                item.append(text.decode('ascii'))
             item = self.process_item(item)
             cart_items.append(item)
+            
 
         return cart_items
 
@@ -57,10 +61,10 @@ class Cart_Page(Base_Page):
         return result_flag
     
     def verify_extra_items(self,expected_cart,actual_cart):
-        "Items which exist in actual but not in expected"
+        "Items which exist in actual but not in expected"        
         item_match_flag = False 
         for item in actual_cart:
-            #Does the item exist in the product list
+            #Does the item exist in the product list            
             found_flag = False 
             price_match_flag = False 
             expected_price = 0
@@ -92,7 +96,7 @@ class Cart_Page(Base_Page):
             found_flag = False
             actual_price = 0 
             for item in actual_cart:
-                if product.name == item[self.COL_NAME]:
+                if product.name == item[self.COL_NAME]:                    
                     found_flag = True
                     if product.price == item[self.COL_PRICE]:
                         price_match_flag = True 
