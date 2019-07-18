@@ -73,9 +73,13 @@ def test_e2e_weather_shopper(base_url,browser,browser_version,os_version,os_name
         #Verify the products displayed on the cart page
         result_flag = test_obj.verify_cart(product_list)
         test_obj.log_result(result_flag,
-        positive="Something wrong with the cart. The log messages above will have the details",
-        negative="Something wrong with the cart. The log messages above will have the details",
+        positive="1.Something wrong with the cart. The log messages above will have the details",
+        negative="2.Something wrong with the cart. The log messages above will have the details",
         level="critical")
+
+        #Goto Payment_frame
+        
+
 
         #Print out the results
         test_obj.write_test_summary()
@@ -83,7 +87,7 @@ def test_e2e_weather_shopper(base_url,browser,browser_version,os_version,os_name
         #Teardown
         test_obj.wait(3)
         expected_pass = test_obj.result_counter
-        actual_pass = test_obj.past_counter
+        actual_pass = test_obj.pass_counter
         test_obj.teardown()
         
     except Exception as e:
