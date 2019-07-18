@@ -697,6 +697,17 @@ class Base_Page(Borg,unittest.TestCase):
         return result_flag
 
 
+
+    def switch_frame(self,name=None,index=None,wait_time=2):
+        "switch to iframe"
+        self.wait(wait_time)
+        self.driver.switch_to_default_content()
+        if name is not None:
+            self.driver.switch_to.frame(name)
+        elif index is not None:
+            frame = self.driver.switch_to.frame(self.driver.find_elements_by_tag_name("iframe")[index])
+
+    
     def write_test_summary(self):
         "Print out a useful, human readable summary"
         self.write('\n\n************************\n--------RESULT--------\nTotal number of checks=%d'%self.result_counter)
