@@ -25,10 +25,9 @@ class Cart_Page(Base_Page):
 
     def process_item(self,item):
         "Process the given item"
-        #Convert the price to an int
+        
         try:
             item[self.COL_PRICE] = int(item[self.COL_PRICE])
-            print(item[self.COL_PRICE])
         except Exception as e:
             self.write("Unable to convert the string %s into a number"%item[self.COL_PRICE])
 
@@ -57,12 +56,12 @@ class Cart_Page(Base_Page):
             result_flag = True
         self.conditional_write(result_flag,
         positive="The expected cart and actual cart have the same number of items: %d"%len(expected_cart),negative="The expected cart has %d items while the actual cart has %d items"%(len(expected_cart),len(actual_cart)))
-
+        
         return result_flag
     
     def verify_extra_items(self,expected_cart,actual_cart):
         "Items which exist in actual but not in expected"        
-        item_match_flag = False 
+        item_match_flag = True 
         for item in actual_cart:
             #Does the item exist in the product list            
             found_flag = False 
@@ -83,9 +82,9 @@ class Cart_Page(Base_Page):
             self.conditional_write(price_match_flag,
             positive="... the expected price matched to %d"%item[self.COL_PRICE],
             negative="... the expected price did not match. Expected: %d but Obtained: %d"%(expected_price,item[self.COL_PRICE]))
-
+                
             item_match_flag &= found_flag and price_match_flag
-        
+           
         return item_match_flag
 
     def verify_missing_item(self,expected_cart,actual_cart):
@@ -110,7 +109,7 @@ class Cart_Page(Base_Page):
             self.conditional_write(price_match_flag,
             positive="... the expected price matched to %d"%product.price,
             negative="... the expected price did not match. Expected: %d but Obtained: %d"%(product.price,actual_price)) 
-
+            
         return item_match_flag
 
     def get_total_price(self):
@@ -122,20 +121,19 @@ class Cart_Page(Base_Page):
             actual_price = int(actual_price)
         except Exception as e:
             self.write("Could not convert '%s' (cart total price) into an integer"%actual_price)
-
+            
         return actual_price
 
     def verify_cart_total(self,expected_cart):
         "Verify the total in the cart"
         expected_total = 0
         for product in expected_cart:
-            expected_total = product.price 
-        actual_total = self.get_total_price()
+            expected_total = expected_total+product.price
+            actual_total = self.get_total_price()
         result_flag = actual_total == expected_total
         self.conditional_write(result_flag,
         positive="The cart total displayed is correct",
         negative="The expected and actual cart totals do not match. Expected: %d, actual: %d"%(expected_total, actual_total))
-
         return result_flag
 
     def verify_cart(self,expected_cart):
