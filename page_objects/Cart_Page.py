@@ -5,11 +5,12 @@ URL: /cart
 
 import conf.locators_conf as locators
 from utils.Wrapit import Wrapit
-
+import time
 from .Base_Page import Base_Page
+from page_objects.Payment_Frame_Object import Payment_Frame_Object
 
 
-class Cart_Page(Base_Page):
+class Cart_Page(Payment_Frame_Object,Base_Page):
     "This class models the cart page"
 
     CART_ROW = locators.CART_ROW
@@ -17,6 +18,19 @@ class Cart_Page(Base_Page):
     CART_TOTAL = locators.CART_TOTAL
     COL_NAME = 0
     COL_PRICE = 1
+
+    #Locators
+    PAY_WITH_CARD_BUTTON = locators.PAY_WITH_CARD_BUTTON
+    PAY_WITH_CARD_TITTLE = locators.PAY_WITH_CARD_TITTLE
+    EMAIL =  locators.EMAIL
+    CARD_NUMBER = locators.CARD_NUMBER
+    EXPIRY_DATE = locators.EXPIRY_DATE
+    CVC_NUMBER  = locators.CVC_NUMBER
+    ZIPCODE =  locators.ZIPCODE
+    CHECKBOX_TICK = locators.CHECKBOX_TICK
+    MOBILE_NUMBER = locators.MOBILE_NUMBER
+    SUBMIT_BUTTON = locators.SUBMIT_BUTTON
+    PAYMENT_SUCESS_TITTLE = locators.PAYMENT_SUCESS_TITTLE
 
     def start(self):
         "Override the start method of base"

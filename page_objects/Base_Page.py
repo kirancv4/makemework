@@ -697,16 +697,24 @@ class Base_Page(Borg,unittest.TestCase):
         return result_flag
 
 
+    def switch_frame(self,name):
+        "Make the driver switch to the frame with a name"
+        result_flag = False
+        try:
+            if name is not None:            
+                self.driver.switch_to.frame(frame_reference= self.driver.find_element_by_xpath(name))                
+                result_flag = True
+            self.conditional_write(result_flag,
+                                'Automation switched to the frame: %s'%name,
+                                'Unable to locate and switch to the frame with name: %s'%name,
+                                level='debug')
+        except Exception as e:
+            self.write("Exception when trying to switch frame")
+            self.write(str(e))
+            self.exceptions.append("Error when switching frame")
 
-    def switch_frame(self,name=None,index=None,wait_time=2):
-        "switch to iframe"
-        self.wait(wait_time)
-        self.driver.switch_to_default_content()
-        if name is not None:
-            self.driver.switch_to.frame(name)
-        elif index is not None:
-            frame = self.driver.switch_to.frame(self.driver.find_elements_by_tag_name("iframe")[index])
-
+        return result_flag
+    
     
     def write_test_summary(self):
         "Print out a useful, human readable summary"

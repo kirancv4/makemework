@@ -29,3 +29,18 @@ approach : In the error messages I founded out that the cart button was not able
 
 Fix:- changed the xpath to [//button[@onclick='goToCart']
 
+Error 6
+AttributeError("'Main_Page' object has no attribute 'verify_cart'")
+I think the page is traversing to "Main_Page"  instead of verifying weather the page has landed to "cart page" or not.
+
+Fix:Rename the the 'main' to 'cart' in cart page.
+
+Error 7
+(List index out of bound)
+
+Approach :Understood the concept of List and how its elements gets appended to the list.
+          Each append statement appends one element at a time.  
+
+Fix : Included the append statement inside for loop so that each object or product can be appende one at a time.
+
+
